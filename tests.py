@@ -59,7 +59,7 @@ class TestSplittingOnRegularExpression(unittest.TestCase):
 
 
     def test_put_back_punc(self):
-        test_input = 'here it is got to go with the flow'
+        test_input = 'here  it is got to go with the flow'
         sentence = put_back_punc(test_input, {'!': [4, ]})
         self.assertEqual('here! it is got to go with the flow', sentence)
 

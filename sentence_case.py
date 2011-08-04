@@ -20,13 +20,17 @@ def put_back_punc(new_sentences, punc_map):
     for punc in punc_map:
         indexes = punc_map[punc]
         for i in indexes:
-            characters.insert(i, punc)
+            characters[i] = punc
     return ''.join(characters)
 
 def mark_sentence_case(data):
     punc_dict = find_all_punc(data)
     sentences = split_on_punc(data)
     sentences = [x.capitalize() for x in sentences]
-    new_sentences = ' '.join(sentences)
+    
+    # we join with two spaces, because when we split, we took out the punc and the
+    # spaces. to put the string back to the correct length, we do two spaces since one
+    # will eventually end up being the punctuation mark
+    new_sentences = '  '.join(sentences)
     new_sentences = put_back_punc(new_sentences, punc_dict)
     return new_sentences
