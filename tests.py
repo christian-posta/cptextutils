@@ -39,28 +39,21 @@ class TestSplittingOnRegularExpression(unittest.TestCase):
         self.assertEqual(12, sentence.count(' ') + 1)
         print sentence
 
-    def test_find_all_punc(self):
-        test_input = 'this is outrageous!!! I cant believe it! What can we do!'
-        starts = [match.start() for match in re.finditer('[!]', test_input)]
-        self.assertTrue(20 in starts)
-        self.assertTrue(39 in starts)
-        self.assertTrue(55 in starts)
-        print starts
 
     def test_find_all_punc(self):
         test_input = 'Here it is!! We finally got it!? '
         all_punc = find_all_punc(test_input)
 
-        expected_punc_exclaim = [11]
-        expected_punc_quest = [31]
+        expected_punc_exclaim = 11
+        expected_punc_quest = 31
 
-        self.assertEqual(expected_punc_exclaim, all_punc['!'])
-        self.assertEqual(expected_punc_quest, all_punc['?'])
+        self.assertEqual(expected_punc_exclaim, all_punc[0][0])
+        self.assertEqual(expected_punc_quest, all_punc[1][0])
 
 
     def test_put_back_punc(self):
         test_input = 'here  it is got to go with the flow'
-        sentence = put_back_punc(test_input, {'!': [4, ]})
+        sentence = put_back_punc(test_input, [(4, '!'),])
         self.assertEqual('here! it is got to go with the flow', sentence)
 
     def test_convert_i(self):
